@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constant;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac;
 using Core.Utilities.ResultManagement;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,8 +18,10 @@ namespace Business.Concrete
         {
             _carRepository = carRepository;
         }
+        [ValidationAspect(typeof(CarValidator),Priority =1)]
         public IResult Add(Car car)
         {
+
             _carRepository.Add(car);
             return new SuccessResult(Message.CarAdd);
         }
