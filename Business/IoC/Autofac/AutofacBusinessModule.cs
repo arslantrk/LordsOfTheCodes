@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
+using Business.Abstract;
+using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interception;
 using DataAccess.Abstract;
@@ -15,7 +17,7 @@ namespace Business.IoC.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CarRepository>().As<ICarRepository>();
-            //builder.RegisterType<>
+            builder.RegisterType<CarManager>().As<ICarService>();
 
             //AOP
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
